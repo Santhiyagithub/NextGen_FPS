@@ -12,6 +12,7 @@ This repository contains two advanced video processing systems developed by Next
 
 1. High-Speed FPS Camera System (Android App)  
 2. Video Temporal Error Detection System (Web-Based Tool)
+Project Link: ![Project link](https://huggingface.co/spaces/yoga28v28/Video_temporal_error_detection)
 
 These systems together provide high-frame-rate video capture and automatic detection of frame drops and merges.
 
