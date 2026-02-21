@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Video Temporal Analyzer</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Video.js -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #f1f5f9; /* FIXED TEXT COLOR */
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        h2, h4 {
+            color: #ffffff; /* STRONG HEADING COLOR */
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #6366f1;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+        }
+
+        .btn-secondary {
+            background: #334155;
+            color: #f1f5f9;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .upload-box {
+            border: 2px dashed #6366f1;
+            padding: 40px;
+            text-align: center;
+            border-radius: 15px;
+            transition: 0.3s;
+            background: #0f172a; /* CONTRAST FIX */
+            color: #e2e8f0;
+        }
+
+        .upload-box p {
+            color: #cbd5f5; /* TEXT VISIBILITY FIX */
+            font-weight: 500;
+        }
+
+        .upload-box:hover {
+            background: #111827;
+        }
+
+        input[type="file"] {
+            background: #020617;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #facc15; /* BRIGHT YELLOW */
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .video-js {
+            border-radius: 12px;
+        }
+
+        .download-btn {
+            margin-top: 15px;
+        }
+
+        .badge {
+            background: #22c55e;
+            font-size: 14px;
+            color: white;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .file-text {
+            color: #94a3b8; /* FIXED FILE TEXT */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">🚀 Smart Video Temporal Analyzer</h2>
+
+    <!-- Upload Section -->
+    <div class="card">
+        <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="showLoading()">
+
+            <div class="upload-box mb-3">
+                <p>📤 Upload your video (MP4 recommended)</p>
+                <input type="file" name="video" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Analyze Video
+            </button>
+
+            <button type="button" onclick="resetPage()" class="btn btn-secondary w-100 mt-2">
+                🔄 Reset / Refresh
+            </button>
+
+        </form>
+
+        <!-- Loading -->
+        <div id="loading">
+            <p>⏳ Processing your video... Please wait</p>
+        </div>
+    </div>
+
+    <!-- Output Section -->
+    {% if output %}
+    <div class="card mt-4">
+
+        <h4>
+            🎥 Output Video 
+            <span class="badge">Processed</span>
+        </h4>
+
+        <p class="file-text">
+            File: {{ output }}
+        </p>
+
+        <!-- Video.js Player -->
+        <video
+            id="my-video"
+            class="video-js vjs-default-skin"
+            controls
+            preload="auto"
+            width="100%"
+            height="400"
+            data-setup='{"fluid": true}'
+        >
+            <source src="/outputs/{{ output }}" type="video/mp4" />
+        </video>
+
+        <!-- Download Buttons -->
+        <div class="download-btn">
+
+            <a href="/outputs/{{ output }}" class="btn btn-success mt-3">
+                ⬇ Download Video
+            </a>
+
+            <a href="/outputs/{{ output.replace('.mp4','.csv') }}" class="btn btn-warning mt-3">
+                📄 Download CSV
+            </a>
+
+        </div>
+
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- Scripts -->
+<script>
+function showLoading() {
+    document.getElementById("loading").style.display = "block";
+}
+
+function resetPage() {
+    const fileInput = document.querySelector('input[type="file"]');
+    if (fileInput) fileInput.value = "";
+
+    const loading = document.getElementById("loading");
+    if (loading) loading.style.display = "none";
+
+    window.location.href = "/";
+}
+
+// Initialize Video.js
+document.addEventListener("DOMContentLoaded", function () {
+    if (document.getElementById("my-video")) {
+        videojs("my-video");
+    }
+});
+</script>
+
+</body>
+</html>
