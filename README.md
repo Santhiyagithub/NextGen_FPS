@@ -173,10 +173,8 @@ Frame,Label
 
 ---
 
-## 👨‍💻 Developer
-
-Yoga Vignesh V  
-GitHub: https://github.com/yogaV28
+## 👨‍💻 Contact
+Mail id: santhiyabalaji2005@gmail.com
 
 ---
 
