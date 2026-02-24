@@ -10,7 +10,7 @@
 
 This repository contains two advanced video processing systems developed by NextGen Team Pixel:
 
-1. High-Speed FPS Camera System (Android App)  
+1. High-Speed FPS Camera System (Android App) App link: https://github.com/yogaV28/NextGen_Team_Pixel/blob/main/FPS_Camera_APP/APK%20File/FPS%20Camera.apk
 2. Video Temporal Error Detection System (Web-Based Tool)
 Project Link: https://huggingface.co/spaces/yoga28v28/Video_temporal_error_detection
 
